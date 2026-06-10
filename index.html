@@ -47,11 +47,18 @@
   .field{margin-bottom:18px;}
   label.q{display:block;font-size:13.5px;font-weight:600;color:var(--wine);margin-bottom:7px;}
   .req{color:var(--wine);}
-  input[type="text"],textarea,select{
+  input[type="text"],input[type="date"],input[type="time"],textarea,select{
     width:100%;font-family:"Inter";font-size:14px;color:var(--ink);background:var(--field);
     border:1px solid var(--line);border-radius:8px;padding:11px 13px;outline:none;
     transition:border-color .15s,box-shadow .15s;
   }
+  select{cursor:pointer;appearance:none;-webkit-appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a3a39' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 14px center;padding-right:34px;}
+  input[type="date"],input[type="time"]{cursor:pointer;}
+  .timepair{display:flex;align-items:center;gap:9px;}
+  .timepair input{flex:1;min-width:0;}
+  .timepair .sep{color:var(--wine-soft);font-size:13px;flex:0 0 auto;}
   textarea{resize:vertical;min-height:78px;line-height:1.5;}
   input:focus,textarea:focus,select:focus{border-color:var(--wine);box-shadow:0 0 0 3px rgba(84,16,15,.12);}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px 22px;}
@@ -137,8 +144,26 @@
     <div class="field"><label class="q">Especialidad / área</label><input type="text" name="especialidad"></div>
     <div class="field"><label class="q">Nombre del consultorio</label><input type="text" name="consultorio_nombre"></div>
     <div class="field"><label class="q">Ubicación</label><input type="text" name="ubicacion"></div>
-    <div class="field"><label class="q">Fecha de inicio acordada</label><input type="text" name="fecha_inicio" placeholder="dd / mm / aaaa"></div>
-    <div class="field full"><label class="q">Mejor forma y horario para contactarte a ti</label><input type="text" name="contacto_owner" placeholder="Ej. WhatsApp, mañanas"></div>
+    <div class="field"><label class="q">Fecha de inicio acordada</label><input type="date" name="fecha_inicio"></div>
+    <div class="field"><label class="q">Mejor forma para contactarte a ti</label>
+      <select name="contacto_forma">
+        <option value="" disabled selected>Selecciona...</option>
+        <option>WhatsApp</option>
+        <option>Llamada</option>
+        <option>Mensaje de texto (SMS)</option>
+        <option>Correo electrónico</option>
+        <option>Otro</option>
+      </select>
+    </div>
+    <div class="field full"><label class="q">Mejor horario para contactarte a ti</label>
+      <select name="contacto_horario">
+        <option value="" disabled selected>Selecciona...</option>
+        <option>Mañana (8:00 am – 12:00 pm)</option>
+        <option>Mediodía (12:00 pm – 2:00 pm)</option>
+        <option>Tarde (2:00 pm – 6:00 pm)</option>
+        <option>Noche (después de 6:00 pm)</option>
+      </select>
+    </div>
   </div>
 
   <!-- 01 CANALES -->
@@ -176,7 +201,13 @@
     </div>
     <div class="grid2">
       <div class="field"><label class="q">Días de atención</label><input type="text" name="dias_atencion" placeholder="Ej. Lun–Vie"></div>
-      <div class="field"><label class="q">Horario de atención</label><input type="text" name="horario" placeholder="Ej. 8:00 am – 4:00 pm"></div>
+      <div class="field"><label class="q">Horario de atención</label>
+        <div class="timepair">
+          <input type="time" name="horario_desde" aria-label="Desde">
+          <span class="sep">a</span>
+          <input type="time" name="horario_hasta" aria-label="Hasta">
+        </div>
+      </div>
     </div>
     <div class="field"><label class="q">¿Hay días, horas o bloqueos fijos que nunca debo agendar?</label><textarea name="bloqueos"></textarea></div>
   </section>
