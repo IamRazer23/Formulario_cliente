@@ -303,7 +303,7 @@
   form.addEventListener('submit', async function(e){
     e.preventDefault();
     if (form._gotcha.value) return;               // spam
-    if (SCRIPT_URL.indexOf('https://script.google.com/macros/s/AKfycbwRgtSG0G53ht0fotl1u9aaUdVguETtU69Ld9OAl9OH9afe85xPdGqxsBn8KMhEZM3M/exec') !== -1){
+    if (SCRIPT_URL.indexOf('PEGA_AQUI') !== -1){
       estado.style.display = 'block';
       estado.textContent = 'Falta configurar la URL del Apps Script en el código (variable SCRIPT_URL).';
       return;
